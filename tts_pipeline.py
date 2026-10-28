@@ -15,6 +15,7 @@ MODELS_DIR = ROOT / "models"
 VOICES_DIR = ROOT / "voices"
 
 BASE_SR = 24000  # Silero and Kokoro both synthesize at 24 kHz
+SPEECH_PAUSE_SEC = 0.12  # after each language run of a message
 
 SILERO_MODEL_URL = "https://models.silero.ai/models/tts/ru/v5_6_ru.pt"
 SILERO_EN_MODEL_URL = "https://models.silero.ai/models/tts/en/v3_en.pt"
@@ -24,6 +25,10 @@ CYRILLIC = re.compile(r"[А-Яа-яЁё]")
 LATIN = re.compile(r"[A-Za-z]")
 URL = re.compile(r"https?://\S+|www\.\S+")
 NUMBER = re.compile(r"\d+(?:[.,]\d+)?")
+PERCENT = re.compile(r"(\d+(?:[.,]\d+)?)\s*%")
+PLUSES = re.compile(r"\++")
+REPEATED_SHORT = re.compile(r"\b([А-Яа-яЁё]{1,3})(?:\s+\1\b)+", re.IGNORECASE)
+RU_VOWEL = re.compile(r"[аеёиоуыэюяАЕЁИОУЫЭЮЯ]")
 
 
 @dataclass
@@ -76,7 +81,7 @@ def split_by_language(text: str, default: str = "ru") -> list[tuple[str, str]]:
         buf.append(tok)
     if buf:
         segments.append((cur_lang or default, "".join(buf).strip()))
-    return [(lang, t) for lang, t in segments if re.search(r"\w", t)]
+    return [(lang, t) for lang, t in segments if re.search(r"[\w+]", t)]  # "+" alone is read as "плюс"
 
 
 def normalize(text: str, lang: str) -> str:
@@ -88,7 +93,34 @@ def normalize(text: str, lang: str) -> str:
         except Exception:
             return m.group()
 
+    def plus(m: re.Match) -> str:
+        # a single "+" before a vowel, at a word start or inside a word, is Silero's stress mark ("т+орты")
+        before = m.string[m.start() - 1] if m.start() else " "
+        after = m.string[m.end()] if m.end() < len(m.string) else ""
+        if lang == "ru" and len(m.group()) == 1 and RU_VOWEL.match(after) and (before.isspace() or CYRILLIC.match(before)):
+            return "+"
+        word = " плюс " if lang == "ru" else " plus "
+        # "C++", "Notepad++": each one is read; a standalone "+++" (agreeing in chat) once
+        return word * len(m.group()) if before.isalnum() else word
+
+    def percent(m: re.Match) -> str:
+        num = m.group(1)
+        if lang != "ru":
+            return f"{num} percent"
+        if not num.isdigit():
+            word = "процента"  # 2,5 процента
+        elif num[-2:] in ("11", "12", "13", "14") or num[-1] in "056789":
+            word = "процентов"
+        else:
+            word = "процент" if num[-1] == "1" else "процента"
+        return f"{num} {word}"
+
     text = URL.sub(" ссылка " if lang == "ru" else " link ", text)
+    if lang == "ru":
+        # "го го го": Silero reads a run of short words as one word ending in "-го" ("во го го"); commas keep them apart
+        text = REPEATED_SHORT.sub(lambda m: ", ".join(m.group().split()), text)
+    text = PERCENT.sub(percent, text)
+    text = PLUSES.sub(plus, text)
     return NUMBER.sub(spell, text)
 
 
@@ -140,7 +172,7 @@ class BaseTTS:
         return np.concatenate(chunks).astype(np.float32) if chunks else np.zeros(0, dtype=np.float32)
 
     def synth_message(self, text: str, voice: Voice) -> np.ndarray:
-        pause = np.zeros(int(BASE_SR * 0.12), dtype=np.float32)
+        pause = np.zeros(int(BASE_SR * SPEECH_PAUSE_SEC), dtype=np.float32)
         parts = []
         for lang, seg in split_by_language(text):
             audio = self.synth(lang, seg, voice)
@@ -150,6 +182,12 @@ class BaseTTS:
 
 
 RVC_EDGE_PAD_SEC = 0.3
+
+# RVC's content encoder (ContentVec) needs neighbouring sounds: alone, a short message loses its consonants
+# ("ахаха" -> "асаса", "го, го, го" -> "дадада"), the same words inside a phrase are fine. So a short message goes
+# through RVC after a neutral phrase, which is cut off again.
+CONTEXT_BELOW_SEC = 2.5
+CONTEXT_CARRIER = {"ru": "Ну ты даёшь.", "en": "Oh, come on."}
 
 
 def _patch_rvc_padding():
@@ -389,6 +427,17 @@ class Pipeline:
         # set after loading: one of the model packages resets torch to a single thread
         torch.set_num_threads(threads)
         self.voices: dict[str, Voice] = {}
+        self.carriers: dict[tuple, np.ndarray] = {}
+
+    def _carrier(self, text: str, voice: Voice) -> np.ndarray:
+        """Base audio of a neutral phrase in the message's first language and the voice's base speaker, cached."""
+        segments = split_by_language(text)
+        lang = segments[0][0] if segments else "ru"
+        speaker = voice.ru_speaker if lang == "ru" else (voice.en_speaker, voice.en_silero_speaker)
+        key = (lang, speaker)
+        if key not in self.carriers:
+            self.carriers[key] = self.tts.synth_message(CONTEXT_CARRIER[lang], voice)  # ends with a pause
+        return self.carriers[key]
 
     def warmup(self, *voice_names: str):
         """First calls are slow (JIT compilation, CUDA kernels, HuBERT/RMVPE loading); also loads every voice.
@@ -425,8 +474,20 @@ class Pipeline:
         if raw:
             t.audio_sec = base.size / BASE_SR
             return (np.clip(base, -1, 1) * 32767).astype(np.int16), BASE_SR, t
+        carrier = self._carrier(text, voice) if base.size < CONTEXT_BELOW_SEC * BASE_SR else None
         t0 = time.perf_counter()
-        out, sr, t.extra["device"] = self.vc.convert(base, BASE_SR, voice, force_cpu=force_cpu)
+        if carrier is None:
+            out, sr, t.extra["device"] = self.vc.convert(base, BASE_SR, voice, force_cpu=force_cpu)
+        else:
+            out, sr, t.extra["device"] = self.vc.convert(np.concatenate([carrier, base]), BASE_SR, voice,
+                                                         force_cpu=force_cpu)
+            # RVC keeps durations to within ~1%: cut in the middle of the carrier's trailing pause
+            ratio = out.size / sr / ((carrier.size + base.size) / BASE_SR)
+            out = out[round((carrier.size / BASE_SR - SPEECH_PAUSE_SEC / 2) * ratio * sr):]
+            fade = min(out.size, int(0.01 * sr))
+            out = out.copy()
+            out[:fade] = (out[:fade] * np.linspace(0, 1, fade)).astype(out.dtype)
+            t.extra["context"] = True
         t.rvc = time.perf_counter() - t0
         t.audio_sec = out.size / sr
         return out, sr, t
