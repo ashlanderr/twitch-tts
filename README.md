@@ -57,7 +57,11 @@ python -m venv .venv
 
 ## Установка: Linux (Ubuntu)
 
-Нужен драйвер NVIDIA 560 или новее (`nvidia-smi` должен показывать видеокарту).
+Основной способ на Linux: прямо в системе, через venv. Проверено на Zorin OS 17 (Ubuntu 22.04), RTX 3050
+Laptop 4 ГБ: голоса, тестовый чат и звук в OBS на другом компьютере через `/overlay` работают.
+
+Нужен драйвер NVIDIA 560 или новее (`nvidia-smi` должен показывать видеокарту). В Ubuntu 22.04 нет Python 3.12
+в стандартных репозиториях, его даёт PPA deadsnakes: `sudo add-apt-repository ppa:deadsnakes/ppa`.
 
 ```
 sudo apt install python3.12-venv python3.12-dev build-essential espeak-ng libportaudio2 libsndfile1
@@ -70,7 +74,7 @@ python3.12 -m venv .venv
 
 ## Установка: Docker (Linux)
 
-Нужны Docker и [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+Запасной вариант, на реальной машине не проверялся. Нужны Docker и [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
 Голоса берутся из `./voices`, скачанные модели сохраняются в `./models` и в томе `cache`.
 
 ```
