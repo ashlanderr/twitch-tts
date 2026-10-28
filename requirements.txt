@@ -1,0 +1,10 @@
+# PyTorch with CUDA: install first
+#   pip install torch torchaudio torchvision --index-url https://download.pytorch.org/whl/cu126
+infer_rvc_python==1.3.1
+kokoro==0.9.4
+num2words
+soundfile
+sounddevice
+psutil
+nvidia-ml-py
+pywin32; sys_platform == "win32"

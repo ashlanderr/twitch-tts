@@ -1,0 +1,25 @@
+# docker compose up -d   ->   UI http://<this machine>:8765, OBS Browser Source http://<this machine>:8765/overlay
+services:
+  tts:
+    build: .
+    image: twitch-tts
+    restart: unless-stopped
+    ports:
+      - "8765:8765"
+    volumes:
+      - ./voices:/app/voices
+      - ./models:/app/models     # Silero, RMVPE (downloaded on first start)
+      - ./logs:/app/logs
+      - cache:/cache             # Hugging Face: HuBERT, Kokoro
+    # extra flags for app.py, e.g. ["--en-engine", "kokoro"]
+    command: []
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  cache:

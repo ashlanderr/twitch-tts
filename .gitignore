@@ -1,0 +1,18 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# models: base ones download on first start, voice models are added by hand (large, third-party)
+models/
+voices/*/*
+!voices/*/voice.json
+
+# run output
+logs/
+out/
+*.wav
+
+# local tooling (paths to this machine's venv)
+.claude/

@@ -1,0 +1,9 @@
+.venv
+.git
+.claude
+__pycache__
+models
+voices
+logs
+out
+*.wav

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTS Overlay</title>
+<style>
+  /* invisible in OBS; in a normal browser shows a status line and the button that unlocks autoplay */
+  html, body { margin: 0; background: transparent; color: #efeff1; font: 14px/1.4 system-ui, sans-serif; }
+  #panel { display: none; padding: 16px; max-width: 520px; }
+  body.browser { background: #0e0e10; }
+  body.browser #panel { display: block; }
+  button { background: #a970ff; border: 0; border-radius: 6px; color: #fff; padding: 8px 14px; font: inherit; font-weight: 600; cursor: pointer; }
+  #log { color: #adadb8; font-size: 12px; margin-top: 10px; white-space: pre-line; }
+</style>
+</head>
+<body>
+<div id="panel">
+  <b>TTS overlay</b> — эта страница проигрывает озвучку. В OBS добавьте её как Browser Source с галочкой
+  «Control audio via OBS»; там она невидима.
+  <p><button id="unlock" hidden>Включить звук</button></p>
+  <div id="status">подключение...</div>
+  <div id="log"></div>
+</div>
+<script>
+const params = new URLSearchParams(location.search);
+const volume = Math.min(1, Math.max(0, parseFloat(params.get("volume") ?? "1")));
+const client = Math.random().toString(36).slice(2, 10);
+const inObs = !!window.obsstudio;
+if (!inObs || params.has("debug")) document.body.classList.add("browser");
+
+const $ = (id) => document.getElementById(id);
+let lastId = 0, unlocked = inObs;
+const log = (s) => { const l = $("log"); l.textContent = (new Date().toLocaleTimeString() + "  " + s + "\n" + l.textContent).slice(0, 2000); };
+const report = (id, kind, error) => fetch("/api/audio/event", {
+  method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, kind, error }),
+}).catch(() => {});
+
+$("unlock").onclick = () => { unlocked = true; $("unlock").hidden = true; new Audio().play().catch(() => {}); };
+
+function play(id, blob) {
+  return new Promise((resolve) => {
+    const url = URL.createObjectURL(blob), audio = new Audio(url);
+    audio.volume = volume;
+    const finish = (kind, error) => { URL.revokeObjectURL(url); report(id, kind, error); resolve(); };
+    let started = 0;
+    audio.onplaying = () => { started = performance.now(); report(id, "playing"); log(`#${id} звучит`); };
+    audio.onended = () => {
+      log(`#${id} озвучено: ${audio.duration.toFixed(1)} с звука за ${((performance.now() - started) / 1000).toFixed(1)} с`);
+      finish("done");
+    };
+    audio.onerror = () => finish("error", "decode error");
+    audio.play().catch((e) => {
+      // a browser blocks sound until the page is clicked; OBS doesn't
+      $("unlock").hidden = false;
+      finish("error", e.name === "NotAllowedError" ? "autoplay blocked: click the overlay page" : String(e));
+    });
+  });
+}
+
+async function loop() {
+  while (true) {
+    try {
+      const r = await fetch(`/api/audio/next?after=${lastId}&client=${client}`, { cache: "no-store" });
+      $("status").textContent = "подключено, ждём сообщений";
+      if (r.status === 200) {
+        lastId = +r.headers.get("X-Msg-Id");
+        await play(lastId, await r.blob());
+      } else if (r.status !== 204) {
+        $("status").textContent = `приложение запущено без --output web (ответ ${r.status})`;
+        await new Promise((ok) => setTimeout(ok, 5000));
+      }
+    } catch (e) {
+      $("status").textContent = "нет связи с приложением, переподключение...";
+      await new Promise((ok) => setTimeout(ok, 2000));
+    }
+  }
+}
+if (!unlocked) $("unlock").hidden = false;
+loop();
+</script>
+</body>
+</html>
