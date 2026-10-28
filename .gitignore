@@ -16,3 +16,6 @@ out/
 
 # local tooling (paths to this machine's venv)
 .claude/
+
+# "!tts <voice>" choices of chatters
+user_voices.json

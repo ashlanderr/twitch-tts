@@ -30,7 +30,7 @@
   .badge.playing { color: var(--accent); border-color: var(--accent); }
   .badge.synth, .badge.ready { color: var(--sys); border-color: var(--sys); }
   .badge.done { color: var(--ok); }
-  .badge.dropped, .badge.error { color: var(--bad); border-color: var(--bad); }
+  .badge.dropped, .badge.error, .badge.deleted, .badge.unknown_voice { color: var(--bad); border-color: var(--bad); }
   .badge.muted { color: var(--muted); }
   .msg.event { color: var(--game); font-size: 12px; text-align: center; padding: 6px; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); margin: 4px 0; }
   .users { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--muted); }
@@ -74,7 +74,7 @@
   <section id="chatwrap">
     <div id="chat"></div>
     <form id="send">
-      <input id="text" placeholder="Своё сообщение (например: !bandit Эй, слышь)" autocomplete="off">
+      <input id="text" placeholder="Своё сообщение (например: !!!#bandit Эй, слышь или !tts arthas)" autocomplete="off">
       <button class="primary">Send</button>
     </form>
   </section>
@@ -120,8 +120,8 @@
 const $ = (id) => document.getElementById(id);
 const COLORS = ["#ff7f50", "#9acd32", "#1e90ff", "#ff69b4", "#daa520", "#00ced1", "#ba55d3", "#3cb371", "#f08080", "#87cefa"];
 const userColor = (u) => COLORS[[...u].reduce((a, c) => a + c.charCodeAt(0), 0) % COLORS.length];
-const STATUS = { "audio error: no overlay connected": "нет оверлея (OBS)", queued: "в очереди", synth: "генерация", ready: "готово к озвучке", playing: "звучит", done: "озвучено", dropped: "выброшено", muted: "TTS выкл", empty: "нечего читать" };
-let settings = null, renderedIds = "", stickBottom = true;
+const STATUS = { "audio error: no overlay connected": "нет оверлея (OBS)", queued: "в очереди", synth: "генерация", ready: "готово к озвучке", playing: "звучит", done: "озвучено", dropped: "выброшено", muted: "TTS выкл", empty: "нечего читать", deleted: "удалено модератором", voice_set: "голос выбран", unknown_voice: "нет такого голоса" };
+let settings = null, renderedIds = "", renderedOutput = "", stickBottom = true;
 
 async function post(path, body) {
   const r = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -189,12 +189,15 @@ function render(st) {
   $("tts").textContent = settings.tts_enabled ? "TTS: on" : "TTS: off";
   $("tts").className = settings.tts_enabled ? "" : "off";
   $("logs").textContent = "logs/" + st.logs.join(", logs/");
+  if (st.twitch) $("status").textContent = `${st.status} · Twitch: ${st.twitch}`;
   const out = st.output || {};
-  $("output").innerHTML = out.mode === "web"
+  const outHtml = out.mode === "web"
     ? `Звук: по сети, OBS Browser Source <code>${esc(["localhost", "127.0.0.1"].includes(location.hostname) && out.lan_ip
         ? `http://${out.lan_ip}:${location.port}` : location.origin)}/overlay</code> — ` +
       (out.listeners ? `подключено: ${out.listeners}` : `<span style="color:var(--bad)">никто не подключён, сообщения не озвучиваются</span>`)
     : "Звук: на звуковую карту этого компьютера";
+  // rewrite only on change: a rewrite every poll drops the selection, and the overlay URL is there to be copied
+  if (outHtml !== renderedOutput) { renderedOutput = outHtml; $("output").innerHTML = outHtml; }
 
   const ids = st.messages.map((m) => m.id + m.status).join();
   if (ids !== renderedIds) { renderedIds = ids; renderChat(st.messages); }

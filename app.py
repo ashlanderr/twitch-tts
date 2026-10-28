@@ -3,6 +3,9 @@
     python app.py                       # http://127.0.0.1:8765
     python app.py --rvc-device cpu --audio-device "CABLE Input"
     python app.py --host 0.0.0.0 --output web   # TTS box: OBS on another PC plays http://<this box>:8765/overlay
+    python app.py --twitch-channel <name>       # voice a real Twitch chat (read-only, no account needed)
+
+Chat commands (as in jeetbot): "!tts <voice>" picks the sender's voice for good, "!!!#<voice> text" voices one message.
 """
 
 import argparse
@@ -15,6 +18,7 @@ import statistics
 import sys
 import threading
 import time
+import zlib
 from collections import deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -23,11 +27,13 @@ from urllib.parse import parse_qs, urlsplit
 import psutil
 
 import chat_sim
+import twitch_chat
 from audio_player import AudioPlayer, WebAudio
 from metrics import MetricsRecorder
 
 ROOT = Path(__file__).resolve().parent
 MAX_TTS_CHARS = 300
+USER_VOICES = ROOT / "user_voices.json"  # "!tts <voice>" choices, kept across restarts
 
 
 class App:
@@ -57,6 +63,11 @@ class App:
         self.play_cv = threading.Condition(self.lock)
         self.busy = False
         self.dropped = 0
+        self.playing: dict | None = None
+        try:
+            self.user_voices: dict[str, str] = json.loads(USER_VOICES.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            self.user_voices = {}
 
         stamp = time.strftime("%Y%m%d_%H%M%S")
         logs = ROOT / "logs"
@@ -73,6 +84,12 @@ class App:
         threading.Thread(target=self._simulate, daemon=True).start()
         threading.Thread(target=self._synth_worker, daemon=True).start()
         threading.Thread(target=self._player, daemon=True).start()
+        self.twitch = None
+        if args.twitch_channel:
+            self.twitch = twitch_chat.TwitchChat(
+                args.twitch_channel, self._twitch_message, self.delete_message,
+                lambda user_id: self.delete_where(lambda m: user_id is None or m.get("user_id") == user_id),
+                ignore={u.strip() for u in args.twitch_ignore.split(",") if u.strip()})
 
     def _state_for_metrics(self) -> dict:
         return {"tts_enabled": int(self.settings["tts_enabled"]), "busy": int(self.busy),
@@ -92,27 +109,51 @@ class App:
 
     # --- chat -------------------------------------------------------------
 
-    def add_message(self, user: str, text: str, voice: str | None = None):
-        if text.startswith("!"):
-            cmd, _, rest = text[1:].partition(" ")
-            if cmd in self.voices and rest.strip():
-                voice, text = cmd, rest.strip()
+    def add_message(self, user: str, text: str, voice: str | None = None, tts: str | None = None,
+                    user_id: str | None = None, ext_id: str = ""):
+        """tts: what to voice if not the text itself (Twitch: without emotes and links); user_id: stable key for the
+        sender's voice (Twitch user id), else the name; ext_id: Twitch message id, so a moderator can delete it."""
+        key = user_id or user
+        tts = twitch_chat.LINK.sub(" ", text) if tts is None else tts
+        status = None
+        cmd, _, rest = text.partition(" ")
+        if cmd.lower() == "!tts":
+            # "!tts <voice>": the sender's voice from now on; not voiced itself
+            name = rest.strip().lower()
+            if name in self.voices:
+                self.user_voices[key] = voice = name
+                USER_VOICES.write_text(json.dumps(self.user_voices, ensure_ascii=False, indent=1), encoding="utf-8")
+                status = "voice_set"
+            else:
+                voice, status = name, "unknown_voice"
+        elif cmd.startswith("!!!#"):
+            # "!!!#<voice> text": this one message in that voice
+            name = cmd[4:].lower()
+            if name in self.voices:
+                voice = name
+                tts = tts.partition(" ")[2] if tts.split(" ", 1)[0] == cmd else tts
+            else:
+                voice, status = name, "unknown_voice"
         if not voice:
-            voice = self.settings["voice"]
+            voice = self.user_voices.get(key) or self.settings["voice"]
             if voice == "per_user":
                 voice = chat_sim.VOICE_OF.get(user)
                 if voice not in self.voices:
-                    voice = self.voices[hash(user) % len(self.voices)]
+                    voice = self.voices[zlib.crc32(key.encode()) % len(self.voices)]  # same voice after a restart
             elif voice == "random":
                 voice = random.choice(self.voices)
         with self.lock:
-            msg = {"id": self.next_id, "user": user, "text": text, "voice": voice, "t_in": time.time(),
-                   "status": "queued"}
+            msg = {"id": self.next_id, "user": user, "text": text, "tts": tts, "voice": voice, "t_in": time.time(),
+                   "status": "queued", "user_id": user_id, "ext_id": ext_id}
             self.next_id += 1
             self.messages.append(msg)
             del self.messages[:-200]
-            if not self.settings["tts_enabled"]:
-                msg["status"] = "muted"
+            if not status and not chat_sim.tts_text(tts).strip():
+                status = "empty"  # only emotes, links or @mentions
+            if not status and not self.settings["tts_enabled"]:
+                status = "muted"
+            if status:
+                msg["status"] = status
                 self._log(msg)
                 return
             self.synth_q.append(msg)
@@ -122,6 +163,30 @@ class App:
                 self.dropped += 1
                 self._log(old)
             self.synth_cv.notify()
+
+    def _twitch_message(self, m: dict):
+        self.add_message(m["name"], m["text"], tts=m["tts"], user_id=m["user_id"], ext_id=m["id"])
+
+    def delete_message(self, ext_id: str):
+        self.delete_where(lambda m: m.get("ext_id") == ext_id)
+
+    def delete_where(self, match):
+        """A moderator deleted messages (or banned/timed out their author): drop them from the queue, stop if playing."""
+        with self.lock:
+            for m in self.messages:
+                if m.get("user") and m["status"] in ("queued", "synth", "ready", "playing") and match(m):
+                    if m["status"] in ("queued", "ready"):
+                        self._log({**m, "status": "deleted"})  # the synth and player threads log their own
+                    m["status"] = "deleted"
+            keep = [m for m in self.synth_q if m["status"] != "deleted"]
+            self.synth_q.clear()
+            self.synth_q.extend(keep)
+            keep = [item for item in self.play_q if item[0]["status"] != "deleted"]
+            self.play_q.clear()
+            self.play_q.extend(keep)
+            playing = self.playing
+        if playing and playing["status"] == "deleted":
+            self.audio.stop(playing["id"])
 
     def add_event(self, text: str):
         """A game moment the chat reacts to; shown in chat, not voiced."""
@@ -159,7 +224,7 @@ class App:
                 self.busy = True
             msg["t_synth"] = time.time()
             try:
-                text = chat_sim.tts_text(msg["text"])[:MAX_TTS_CHARS]
+                text = chat_sim.tts_text(msg["tts"])[:MAX_TTS_CHARS]
                 audio, sr, t = self.pipe.say(text, msg["voice"])
                 msg.update(tts_s=round(t.tts, 2), rvc_s=round(t.rvc, 2), audio_s=round(t.audio_sec, 1),
                            device=t.extra.get("device", ""))
@@ -170,7 +235,9 @@ class App:
                 continue
             self.busy = False
             with self.play_cv:
-                if audio.size:
+                if msg["status"] == "deleted":
+                    self._log(msg)
+                elif audio.size:
                     msg["status"] = "ready"
                     self.play_q.append((msg, audio, sr))
                     self.play_cv.notify()
@@ -184,7 +251,10 @@ class App:
                 while not self.play_q:
                     self.play_cv.wait()
                 msg, audio, sr = self.play_q.popleft()
+                self.playing = msg
             self.audio.play(msg["id"], audio, sr)
+            if msg["status"] == "deleted":  # deleted between the queue and the player
+                self.audio.stop(msg["id"])
             while True:
                 kind, msg_id, err = self.audio.next_event()
                 if msg_id != msg["id"]:
@@ -192,10 +262,14 @@ class App:
                 if kind == "playing":
                     msg["t_play"] = time.time()
                     msg["latency_s"] = round(msg["t_play"] - msg["t_in"], 2)
-                    msg["status"] = "playing"
+                    if msg["status"] != "deleted":
+                        msg["status"] = "playing"
                     continue
-                msg["status"] = "done" if kind == "done" else f"audio error: {err}"
+                if msg["status"] != "deleted":
+                    msg["status"] = "done" if kind == "done" else f"audio error: {err}"
                 break
+            with self.lock:
+                self.playing = None
             self._log(msg)
 
     def _log(self, m: dict):
@@ -210,7 +284,8 @@ class App:
 
     def state(self) -> dict:
         with self.lock:
-            msgs = [{k: v for k, v in m.items() if not k.startswith("t_")} for m in self.messages[-80:]]
+            msgs = [{k: v for k, v in m.items() if not k.startswith("t_") and k not in ("tts", "user_id", "ext_id")}
+                    for m in self.messages[-80:]]
             lat = [m["latency_s"] for m in self.messages if "latency_s" in m]
             synth = [m["tts_s"] + m["rvc_s"] for m in self.messages if "rvc_s" in m]
             stats = {
@@ -226,6 +301,7 @@ class App:
             }
         return {"status": self.status, "settings": self.settings, "voices": self.voices, "messages": msgs,
                 "users": chat_sim.VOICE_OF, "output": {**self.audio.info(), "lan_ip": lan_ip()},
+                "twitch": self.twitch and self.twitch.status,
                 "stats": stats, "metrics": self.metrics.latest, "history": self.metrics.history[-120:],
                 "logs": [str(self.msg_log_path.name), str(self.msg_log_path.name).replace("messages", "metrics")]}
 
@@ -265,6 +341,8 @@ def make_handler(app: App):
                 self._send(200, pages[url.path].read_bytes(), "text/html; charset=utf-8")
             elif url.path == "/api/state":
                 self._json(app.state())
+            elif url.path == "/api/audio/stopped" and isinstance(app.audio, WebAudio):
+                self._json({"stop": app.audio.should_stop(int((parse_qs(url.query).get("id") or ["0"])[0]))})
             elif url.path == "/api/audio/next" and isinstance(app.audio, WebAudio):
                 q = parse_qs(url.query)
                 after = int((q.get("after") or ["0"])[0])
@@ -319,6 +397,9 @@ def main():
     ap.add_argument("--audio-device", default=None, help="output device name/index (see say.py --list-audio-devices)")
     ap.add_argument("--host", default="127.0.0.1", help="0.0.0.0 to reach the UI and /overlay from other machines")
     ap.add_argument("--port", type=int, default=8765)
+    ap.add_argument("--twitch-channel", default=None, help="voice this Twitch channel's chat (read-only, no login)")
+    ap.add_argument("--twitch-ignore", default="",
+                    help="more chat bots to skip, comma-separated logins (common ones are skipped already)")
     ap.add_argument("--vram-reserve-mb", type=int, default=1024,
                     help="if less VRAM than this is free (game included), voice the message on the CPU")
     ap.add_argument("--priority", choices=["normal", "below_normal"], default="below_normal",

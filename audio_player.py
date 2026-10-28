@@ -1,6 +1,7 @@
 """Audio output: a local sound card (AudioPlayer) or the network (WebAudio, for OBS on another PC).
 
-Both take clips with play() and report ("playing" | "done" | "error", msg_id, error) through next_event().
+Both take clips with play() and report ("playing" | "done" | "error", msg_id, error) through next_event();
+stop(msg_id) cuts a clip short (a moderator deleted the message), which then reports "done".
 """
 
 import io
@@ -10,7 +11,7 @@ import threading
 import time
 
 
-def _player_loop(jobs: mp.Queue, events: mp.Queue, device):
+def _player_loop(jobs: mp.Queue, events: mp.Queue, stop, device):
     import sounddevice as sd
 
     while True:
@@ -20,7 +21,14 @@ def _player_loop(jobs: mp.Queue, events: mp.Queue, device):
         msg_id, audio, sr = job
         events.put(("playing", msg_id, None))
         try:
-            sd.play(audio, sr, device=device, blocking=True, latency="high")
+            sd.play(audio, sr, device=device, latency="high")
+            stream = sd.get_stream()
+            while stream.active:
+                if stop.value == msg_id:
+                    sd.stop()
+                    break
+                time.sleep(0.05)
+            sd.wait()  # raises what went wrong in the stream, if anything
             events.put(("done", msg_id, None))
         except Exception as e:
             events.put(("error", msg_id, str(e)))
@@ -33,11 +41,15 @@ class AudioPlayer:
         ctx = mp.get_context("spawn")
         self.jobs = ctx.Queue()
         self.events = ctx.Queue()
-        self.proc = ctx.Process(target=_player_loop, args=(self.jobs, self.events, device), daemon=True)
+        self.stop_id = ctx.Value("q", 0, lock=False)
+        self.proc = ctx.Process(target=_player_loop, args=(self.jobs, self.events, self.stop_id, device), daemon=True)
         self.proc.start()
 
     def play(self, msg_id: int, audio, sr: int):
         self.jobs.put((msg_id, audio, sr))
+
+    def stop(self, msg_id: int):
+        self.stop_id.value = msg_id
 
     def next_event(self):
         """Blocks until the player reports ("playing" | "done" | "error", msg_id, error)."""
@@ -65,6 +77,7 @@ class WebAudio:
         self.pending: dict[int, dict] = {}  # msg_id -> {"playing": Event, "done": Event}
         self.events: queue.Queue = queue.Queue()
         self.listeners: dict[str, float] = {}  # page id -> last poll
+        self.stopped: set[int] = set()  # clips to cut short; the playing page asks via should_stop()
 
     def play(self, msg_id: int, audio, sr: int):
         import soundfile as sf
@@ -83,6 +96,19 @@ class WebAudio:
 
     def next_event(self):
         return self.events.get()
+
+    def stop(self, msg_id: int):
+        with self.cv:
+            if msg_id not in self.pending:
+                return
+            self.stopped.add(msg_id)
+            if self.clip and self.clip[0] == msg_id:
+                self.clip = None  # not picked up yet: no page will get it
+        self.report(msg_id, "done")
+
+    def should_stop(self, msg_id: int) -> bool:
+        with self.cv:
+            return msg_id in self.stopped
 
     def _watch(self, msg_id: int, p: dict, duration: float):
         if not p["playing"].wait(self.START_TIMEOUT):
@@ -105,6 +131,7 @@ class WebAudio:
                 p["playing"].set()
                 p["done"].set()
                 del self.pending[msg_id]
+                self.stopped = {i for i in self.stopped if i > msg_id - 50}
                 if self.clip and self.clip[0] == msg_id:
                     self.clip = None
         self.events.put((kind, msg_id, error))

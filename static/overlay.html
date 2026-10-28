@@ -42,7 +42,18 @@ function play(id, blob) {
   return new Promise((resolve) => {
     const url = URL.createObjectURL(blob), audio = new Audio(url);
     audio.volume = volume;
-    const finish = (kind, error) => { URL.revokeObjectURL(url); report(id, kind, error); resolve(); };
+    let poll = 0;
+    const finish = (kind, error) => { clearInterval(poll); URL.revokeObjectURL(url); report(id, kind, error); resolve(); };
+    // a moderator deleted the message: cut the clip short
+    poll = setInterval(async () => {
+      try {
+        if ((await (await fetch(`/api/audio/stopped?id=${id}`, { cache: "no-store" })).json()).stop) {
+          audio.pause();
+          log(`#${id} остановлено: сообщение удалено`);
+          finish("done");
+        }
+      } catch (e) {}
+    }, 300);
     let started = 0;
     audio.onplaying = () => { started = performance.now(); report(id, "playing"); log(`#${id} звучит`); };
     audio.onended = () => {
