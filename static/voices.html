@@ -51,7 +51,7 @@
 <body>
 <header>
   <h1>Голоса TTS</h1>
-  <a href="/">← тестовый чат</a>
+  <a href="/" id="back">← тестовый чат</a>
 </header>
 <main>
   <section class="help">
@@ -132,7 +132,7 @@ function toggle(id) {
     return;
   }
   current = id;
-  audio.src = "/samples/" + voices.find(v => v.id === id).sample;
+  audio.src = "samples/" + voices.find(v => v.id === id).sample;
   audio.play();
 }
 
@@ -170,7 +170,10 @@ document.querySelectorAll("[data-g]").forEach(b => b.addEventListener("click", (
   render();
 }));
 
-fetch("/samples/voices.json").then(r => r.json()).then(vs => {
+// relative paths: the app serves this page at /voices, GitHub Pages at /twitch-tts/
+if (location.hostname.endsWith(".github.io")) document.getElementById("back").remove();  // no test chat there
+
+fetch("samples/voices.json").then(r => r.json()).then(vs => {
   voices = vs;
   const cats = document.getElementById("cats");
   for (const c of ["", ...new Set(vs.map(v => v.category))]) {

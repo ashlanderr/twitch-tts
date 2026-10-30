@@ -64,6 +64,9 @@ python fetch_voices.py --check      # сверить файлы на диске 
 `gender` (`m`/`f`), `tags` и `sample_text`, затем записать образцы: `python samples.py` (только новые голоса) или
 `python samples.py --force` (все). Они сохраняются в `static/samples/`.
 
+Эта же страница публикуется на GitHub Pages: https://ashlanderr.github.io/twitch-tts/. Сайт собирается
+автоматически при пуше в `main`, если изменилась страница или образцы (`.github/workflows/pages.yml`).
+
 После добавления голоса сожмите его индекс: `python compact_index.py <имя>`. Векторы сохраняются в fp16, файл
 `model.compact.index` вдвое меньше, на звук это не влияет. Голоса держатся в оперативной памяти (~100–130 МБ
 на голос), на видеокарте только последний использованный.
