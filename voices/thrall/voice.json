@@ -2,5 +2,27 @@
   "pitch": 0,
   "ru_speaker": "aidar",
   "en_speaker": "am_fenrir",
-  "en_silero_speaker": "en_0"
+  "en_silero_speaker": "en_0",
+  "title": "Тралл",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "орда",
+    "вождь"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Thrall",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Thrall/resolve/443bfec8387409196c3cb464dfbcabef01d1c2bc/thrall-fp32-no_noise-normal.zip",
+        "member": "thrall-fp32-no_noise-normal/thrall-fp32-no_noise-normal_598e_37076s.pth",
+        "sha256": "1cb8a0f55a9cba8c49d5ed5da0df08a080abb6a60835337f064d4bb5c80a9dad"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Thrall/resolve/443bfec8387409196c3cb464dfbcabef01d1c2bc/thrall-fp32-no_noise-normal.zip",
+        "member": "thrall-fp32-no_noise-normal/thrall-fp32-no_noise-normal.index",
+        "sha256": "20e5657ed8ca60babef27180077952368b4cd356f131f7c95ab10319fd332d94"
+      }
+    }
+  }
 }

@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Долговец",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона",
+    "долг"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Vilkov-Dolg",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Vilkov-Dolg/resolve/7937d55cea733f05432e844dcf3a60b5980eb1e6/vilkov-dolg-fp32-no_noise_normal.zip",
+        "member": "dolg-fp32-no_noise_normal/dolg-fp32-no_noise_normal_843e_55638s.pth",
+        "sha256": "4daa1bbaf802ffd56d8300141643e8b98a73ae10523b7e97ac1a031a527a01bd"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Vilkov-Dolg/resolve/7937d55cea733f05432e844dcf3a60b5980eb1e6/vilkov-dolg-fp32-no_noise_normal.zip",
+        "member": "dolg-fp32-no_noise_normal/dolg-fp32-no_noise_normal.index",
+        "sha256": "00d3f520058e202c96b17e55e75d46427d6b4fd1eed24d23fd75a08e576e486f"
+      }
+    }
+  }
+}

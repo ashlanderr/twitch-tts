@@ -2,5 +2,27 @@
   "pitch": 0,
   "ru_speaker": "xenia",
   "en_speaker": "af_heart",
-  "en_silero_speaker": "en_1"
+  "en_silero_speaker": "en_1",
+  "title": "Джайна",
+  "category": "Варкрафт",
+  "gender": "f",
+  "tags": [
+    "альянс",
+    "маг"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Jaina",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Jaina/resolve/975a4a45edf10335001caec15b031d073964c92d/jaina-fp32-no_noise_normal.zip",
+        "member": "jaina-fp32-no_noise_normal/jaina-fp32-no_noise_normal_935e_20570s.pth",
+        "sha256": "8d385c86d10a53c01d58b8eed621910770120a29adfb4c38eed86939892501b3"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Jaina/resolve/975a4a45edf10335001caec15b031d073964c92d/jaina-fp32-no_noise_normal.zip",
+        "member": "jaina-fp32-no_noise_normal/jaina-fp32-no_noise_normal.index",
+        "sha256": "6c0c24e9f5a46fb22143b3490e13138222e081de597965701311dc9d8b1ad27a"
+      }
+    }
+  }
 }

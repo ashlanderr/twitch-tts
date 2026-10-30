@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "eugene",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Монолитовец",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона",
+    "монолит"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Cherevatenko-Monolit",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Cherevatenko-Monolit/resolve/e042c1c81466112c81b6ad9bc2e44226df3e5dfe/monolit-new-fp32-no_noise-normal.zip",
+        "member": "monolit-new-fp32-no_noise-normal/monolit-new-fp32-no_noise-normal_370e_16650s.pth",
+        "sha256": "fa6a8358cc5d3f21124de6d0a48591dad6209bfa2f035c0f508d2df33932acc2"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Cherevatenko-Monolit/resolve/e042c1c81466112c81b6ad9bc2e44226df3e5dfe/monolit-new-fp32-no_noise-normal.zip",
+        "member": "monolit-new-fp32-no_noise-normal/monolit-new-fp32-no_noise-normal.index",
+        "sha256": "9bb4b7c36ee331cd44ec7245263cee5d3979836b3c73a4845a682d9cb15fc405"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "baya",
+  "en_speaker": "af_heart",
+  "en_silero_speaker": "en_1",
+  "title": "Леди Вайш",
+  "category": "Варкрафт",
+  "gender": "f",
+  "tags": [
+    "наги"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/LadyVashj",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/LadyVashj/resolve/c8944755b0d1fa7bdf7d1bcf974292eeb529dbdc/LadyVashj-fp32-no_noise-normal-de_reverb.zip",
+        "member": "LadyVashj-fp32-no_noise-normal-de_reverb/LadyVashj-fp32-no_noise-normal-de_reverb_972e_54432s.pth",
+        "sha256": "3654c47415e5315ea477836358ece6e70f8c01a232322587269201eab6e3b5c9"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/LadyVashj/resolve/c8944755b0d1fa7bdf7d1bcf974292eeb529dbdc/LadyVashj-fp32-no_noise-normal-de_reverb.zip",
+        "member": "LadyVashj-fp32-no_noise-normal-de_reverb/LadyVashj-fp32-no_noise-normal-de_reverb.index",
+        "sha256": "191b33188aa307cfec28293d5512f26cb56c3f7e7ac7a1fde5ce1155452d2390"
+      }
+    }
+  }
+}

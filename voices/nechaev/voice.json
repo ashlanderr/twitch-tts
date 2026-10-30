@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Майор Нечаев",
+  "category": "Atomic Heart",
+  "gender": "m",
+  "tags": [
+    "п-3"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Майор Нечаев/MajorNechayev.pth",
+        "sha256": "a46d52bf87d1f33e34167de136ef17acde85d03cc9bda937e443f9c16bcd6f5a"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Майор Нечаев/MajorNechayev.index",
+        "sha256": "e566ee8a9bca26ea0116596c00d3341e06b51369d448b645cb0626722aedfd63"
+      }
+    }
+  }
+}

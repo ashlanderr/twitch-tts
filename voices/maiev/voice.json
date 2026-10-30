@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "baya",
+  "en_speaker": "af_heart",
+  "en_silero_speaker": "en_1",
+  "title": "Майев",
+  "category": "Варкрафт",
+  "gender": "f",
+  "tags": [
+    "ночные эльфы",
+    "стражница"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Maiev",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Maiev/resolve/7015e3e3ac2ced3cf5174ee2baef57e7cf73ceb2/maiev-fp32-no_noise_normal-de_reverb.zip",
+        "member": "maiev-fp32-no_noise_normal-de_reverb/maiev-fp32-no_noise_normal-de_reverb_741e_54093s.pth",
+        "sha256": "f72b7841f75bfcee9dce202b5065b91bd8a53147f4a4084d38fa59c637632efc"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Maiev/resolve/7015e3e3ac2ced3cf5174ee2baef57e7cf73ceb2/maiev-fp32-no_noise_normal-de_reverb.zip",
+        "member": "maiev-fp32-no_noise_normal-de_reverb/maiev-fp32-no_noise_normal-de_reverb.index",
+        "sha256": "123ef0322bcf0c9ed759474b28d64abbef969e214d365511ad26074e6453a2c7"
+      }
+    }
+  }
+}

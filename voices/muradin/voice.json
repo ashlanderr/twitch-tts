@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Мурадин",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "альянс",
+    "дворф"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Muradin",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Muradin/resolve/405a71d8a2b7e6c7780cc3aa810ec4a755b60a81/muradin-fp32-no_noise-normal.zip",
+        "member": "muradin-fp32-no_noise-normal/muradin-fp32-no_noise-normal_921e_11052s.pth",
+        "sha256": "3270356b0e12e467b3e2d79d3d358d8606002e49ae1b9f17ba6fb2e54daf4285"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Muradin/resolve/405a71d8a2b7e6c7780cc3aa810ec4a755b60a81/muradin-fp32-no_noise-normal.zip",
+        "member": "muradin-fp32-no_noise-normal/muradin-fp32-no_noise-normal.index",
+        "sha256": "dbeabb1b33d45f67041c07ae7f217ef5d4a6a1c3c8a89a5ada4a9e732de1d636"
+      }
+    }
+  }
+}

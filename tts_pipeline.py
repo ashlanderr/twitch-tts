@@ -49,6 +49,8 @@ class Voice:
         cfg = {}
         if (d / "voice.json").exists():
             cfg = json.loads((d / "voice.json").read_text(encoding="utf-8"))
+            # title, category, gender, tags, sample_text are for the voices page (samples.py), not for synthesis
+            cfg = {k: v for k, v in cfg.items() if k in cls.__dataclass_fields__}
         index = d / "model.compact.index"  # see compact_index.py
         if not index.exists():
             index = d / "model.index"

@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Газлоу",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "гоблины",
+    "торговец"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Goblins-Gazlowe",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Goblins-Gazlowe/resolve/8327e682dc6e724675642cd692dfc1849c09083e/goblin-gazlowe-fp32-no_noise-normal.zip",
+        "member": "goblin-gazlowe-fp32-no_noise-normal/goblin-gazlowe-fp32-no_noise-normal_601e_15626s.pth",
+        "sha256": "7ff404b0c2a91e2ecb1bc1d3a60e9939e8c37f633430f36b410b715b33ced114"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Goblins-Gazlowe/resolve/8327e682dc6e724675642cd692dfc1849c09083e/goblin-gazlowe-fp32-no_noise-normal.zip",
+        "member": "goblin-gazlowe-fp32-no_noise-normal/goblin-gazlowe-fp32-no_noise-normal.index",
+        "sha256": "f727eaca232669e6aaf57289838be28cab1874ec7d0779ec9d7e83523f249772"
+      }
+    }
+  }
+}

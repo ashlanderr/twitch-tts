@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "xenia",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Лунтик",
+  "category": "Мультфильмы",
+  "gender": "m",
+  "tags": [
+    "мультик"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/лунтик/lutic.pth",
+        "sha256": "0e493ad9e95c2d622469cdb97165a72686a6fa613006a9ce01afe1d9182ca573"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/лунтик/added_IVF129_Flat_nprobe_1_lutic_v2.index",
+        "sha256": "86ede51f51f15676b3d03b249b6de86527e387bcd58fab0d92fcfe20ebfb9b28"
+      }
+    }
+  }
+}

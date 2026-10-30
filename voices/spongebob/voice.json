@@ -1,0 +1,27 @@
+{
+  "pitch": 9,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Губка Боб",
+  "category": "Мультфильмы",
+  "gender": "m",
+  "tags": [
+    "бикини боттом"
+  ],
+  "source": {
+    "page": "https://huggingface.co/DaunIDebil/SpongebobRUSDub-RVC2.0",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/DaunIDebil/SpongebobRUSDub-RVC2.0/resolve/2a4485394874ee12039b5393641ec9e6eb388ab9/SpongebobRUSDub-RVC2.0.zip",
+        "member": "Spongebob.pth",
+        "sha256": "d17a1c81fb0f5b380089836e81a3539f8f24a0040d01d83d28da091ce6be4f99"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/DaunIDebil/SpongebobRUSDub-RVC2.0/resolve/2a4485394874ee12039b5393641ec9e6eb388ab9/SpongebobRUSDub-RVC2.0.zip",
+        "member": "added_IVF321_Flat_nprobe_1_Spongebob_v2.index",
+        "sha256": "24d3bb6a94f70f5587fc853cbbeb3925431b87d6e00df6df236e64fb3ca383d6"
+      }
+    }
+  }
+}

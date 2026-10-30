@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Шпион",
+  "category": "Team Fortress 2",
+  "gender": "m",
+  "tags": [
+    "tf2"
+  ],
+  "source": {
+    "page": "https://huggingface.co/DaunIDebil/SpyRUSDub-RVC2.0",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/DaunIDebil/SpyRUSDub-RVC2.0/resolve/04fe3a74116c9d5e71d197a8396287487f62c9bd/SpyRUSDub-RVC2.0.zip",
+        "member": "SpyRUSDub.pth",
+        "sha256": "a0e518478fdf678bd09cf9b218ce0d3bfe9e543235a327b67d67dfce64263356"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/DaunIDebil/SpyRUSDub-RVC2.0/resolve/04fe3a74116c9d5e71d197a8396287487f62c9bd/SpyRUSDub-RVC2.0.zip",
+        "member": "added_IVF498_Flat_nprobe_1_SpyRUSDub_v2.index",
+        "sha256": "e34d11fea812c5109dda480450df5e8fd43cc39815716a993be243f649243d2b"
+      }
+    }
+  }
+}

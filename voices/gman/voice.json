@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "eugene",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "G-Man",
+  "category": "Half-Life",
+  "gender": "m",
+  "tags": [
+    "hl"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/gman/GMAN_e1000_s5000.pth",
+        "sha256": "eef86d098f45d32993dfc599572b6cc2c31d4663d909d6bb1bf21c2f5d18fe47"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/gman/added_IVF229_Flat_nprobe_1_GMAN_v2.index",
+        "sha256": "05cc2a10151529d7326b278938610f2b5af6860e4a53ed60fc28537616f1b662"
+      }
+    }
+  }
+}

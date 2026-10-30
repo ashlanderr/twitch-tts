@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Наёмник",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/German-mercenary",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/German-mercenary/resolve/e863d3f3ea5dbd757585e46c9fd134aabbd119cb/german-mercenary-fp32-no-noise-normal.zip",
+        "member": "german-mercenary-fp32-no-noise-normal/german-mercenary-fp32-no-noise-normal_800e_24800s.pth",
+        "sha256": "dac1902491d2620a26b01acacdca380ff9aef0770b33f59e0a68d59ee1c82f49"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/German-mercenary/resolve/e863d3f3ea5dbd757585e46c9fd134aabbd119cb/german-mercenary-fp32-no-noise-normal.zip",
+        "member": "german-mercenary-fp32-no-noise-normal/german-mercenary-fp32-no-noise-normal.index",
+        "sha256": "f39de94b97a03d1274d9b0fbb694d20d66ff6e80fdd406111f895422414d9f3f"
+      }
+    }
+  }
+}

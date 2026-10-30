@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Патрик",
+  "category": "Мультфильмы",
+  "gender": "m",
+  "tags": [
+    "бикини боттом"
+  ],
+  "source": {
+    "page": "https://huggingface.co/DaunIDebil/PatrickRUSDub-RVC2.0",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/DaunIDebil/PatrickRUSDub-RVC2.0/resolve/53313f0f938de48e0266519b938fb654dcab2426/PatrickRUSDub-RVC2.0.zip",
+        "member": "Patrick.pth",
+        "sha256": "53bf385c22451e2f9130083e6e2550fe0ebf85a05023d6af65c348d6dc751ead"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/DaunIDebil/PatrickRUSDub-RVC2.0/resolve/53313f0f938de48e0266519b938fb654dcab2426/PatrickRUSDub-RVC2.0.zip",
+        "member": "added_IVF252_Flat_nprobe_1_Patrick_v2.index",
+        "sha256": "3dc4edf26308b366890aefe2495df2c3af034d707f4ddc13d6d4bd6d1b476cf9"
+      }
+    }
+  }
+}

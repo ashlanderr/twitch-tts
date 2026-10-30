@@ -1,0 +1,25 @@
+{
+  "pitch": 0,
+  "ru_speaker": "xenia",
+  "en_speaker": "af_heart",
+  "en_silero_speaker": "en_1",
+  "title": "Мита",
+  "category": "MiSide",
+  "gender": "f",
+  "tags": [
+    "девушка"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Leanside/Mita-Miside-Ru-RVC-model",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Leanside/Mita-Miside-Ru-RVC-model/resolve/4b9de8dbcda93e4dc71f4c12535fe65e12ff42c0/Miside.pth",
+        "sha256": "6e7d3386eccceee8ab9c38ed7b9e84eac971fe6fe67d03d20996738b39c8ba25"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Leanside/Mita-Miside-Ru-RVC-model/resolve/4b9de8dbcda93e4dc71f4c12535fe65e12ff42c0/added_IVF1693_Flat_nprobe_1_Miside_v2.index",
+        "sha256": "205832afa9cd36da2e5f29174d37235aca71c192d713ee9e66365da0cf8338a8"
+      }
+    }
+  }
+}

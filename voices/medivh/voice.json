@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "eugene",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Медив",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "маг",
+    "пророк"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Mediv",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Mediv/resolve/c0e05c6102122eed078a2d771201af04158fdd83/mediv-fp32-no_noise_normal.zip",
+        "member": "mediv-fp32-no_noise_normal/mediv-fp32-no_noise_normal_702e_24570s.pth",
+        "sha256": "c02cec7543b940d338d63110b25eeb9c0f876409d78c833e9fb0015fe81761e6"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Mediv/resolve/c0e05c6102122eed078a2d771201af04158fdd83/mediv-fp32-no_noise_normal.zip",
+        "member": "mediv-fp32-no_noise_normal/mediv-fp32-no_noise_normal.index",
+        "sha256": "f3d4a174309dfa389f66b339e6d03d9af9c9d8a181b12cac98a188e6113c605b"
+      }
+    }
+  }
+}

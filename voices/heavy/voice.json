@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Пулемётчик",
+  "category": "Team Fortress 2",
+  "gender": "m",
+  "tags": [
+    "tf2"
+  ],
+  "source": {
+    "page": "https://huggingface.co/DaunIDebil/HeavyRUSDub-RVC2.0",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/DaunIDebil/HeavyRUSDub-RVC2.0/resolve/6fef166546af82cfac08276329e12839727b1aaf/HeavyRUSDub-RVC2.0.zip",
+        "member": "HeavyRUSDub.pth",
+        "sha256": "20d1f663ba5a36ea14218a6d9575c83b205f0a270e10541499c67127024f2e5d"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/DaunIDebil/HeavyRUSDub-RVC2.0/resolve/6fef166546af82cfac08276329e12839727b1aaf/HeavyRUSDub-RVC2.0.zip",
+        "member": "added_IVF1043_Flat_nprobe_1_HeavyRUSDub_v2.index",
+        "sha256": "4560d14325a775c43b2c3eb473b48f1d57c33dc80a08f7ab437ff526fd7deca6"
+      }
+    }
+  }
+}

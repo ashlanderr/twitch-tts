@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Метрокоп",
+  "category": "Half-Life",
+  "gender": "m",
+  "tags": [
+    "hl2",
+    "альянс"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Hl2 Коп/MetrocopRUS_v2.pth",
+        "sha256": "7b5721e5a95f3540e4eb1ab1fa7a88c7ac079ea24935f1fe9eb77019191ec05b"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Hl2 Коп/added_IVF491_Flat_nprobe_1_MetrocopRUS_v2_v2.index",
+        "sha256": "f7ad6c640ff74787f13c94336360f86a7c8ae45afbf16c7bf17e9b376c15a467"
+      }
+    }
+  }
+}

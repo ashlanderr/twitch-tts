@@ -2,5 +2,27 @@
   "pitch": 0,
   "ru_speaker": "eugene",
   "en_speaker": "am_adam",
-  "en_silero_speaker": "en_0"
+  "en_silero_speaker": "en_0",
+  "title": "Бугай",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "орда",
+    "юнит"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Grunt",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Grunt/resolve/5dcba77f5aa2d4d58d46ae578b93cf9a10ffb169/grunt-fp32-no_noise_normal.zip",
+        "member": "grunt-fp32-no_noise_normal/grunt-fp32-no_noise_normal_860e_27520s.pth",
+        "sha256": "4666a363e91e0c1416d5119e6ac13837cf0780a6c08eb0be73147e80651df808"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Grunt/resolve/5dcba77f5aa2d4d58d46ae578b93cf9a10ffb169/grunt-fp32-no_noise_normal.zip",
+        "member": "grunt-fp32-no_noise_normal/grunt-fp32-no_noise_normal.index",
+        "sha256": "b33416911828a2b707084dbc005251aa38f5d2db135082a2179c61f5e3d2ede2"
+      }
+    }
+  }
 }

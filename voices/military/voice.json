@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Военный",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона",
+    "армия"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Yatsenko-Military",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Yatsenko-Military/resolve/ad6befeffa12fbcff018559d184858e5b66c10c0/yatsenko-military-fp32-no_noise_normal.zip",
+        "member": "yatsenko-military-fp32-no_noise_normal/yatsenko-military-fp32-no_noise_normal_1250e_13750s.pth",
+        "sha256": "a44877d662d2a408aa18ebaf67748ae6d468d404abdbf2a68096bd98be84bbbb"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Yatsenko-Military/resolve/ad6befeffa12fbcff018559d184858e5b66c10c0/yatsenko-military-fp32-no_noise_normal.zip",
+        "member": "yatsenko-military-fp32-no_noise_normal/yatsenko-military-fp32-no_noise_normal.index",
+        "sha256": "047f73864aea16e4800dfa9ef6b392e374c6289f67101e35bfa31a9eecdab4eb"
+      }
+    }
+  }
+}

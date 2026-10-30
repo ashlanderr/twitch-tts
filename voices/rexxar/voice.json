@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Рексар",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "орда",
+    "охотник"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Rexxar",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Rexxar/resolve/32722007fc756fc0a54508a176e97682f6a0b44e/rexxar-fp32-no_noise-normal.zip",
+        "member": "rexxar-fp32-no_noise-normal/rexxar-fp32-no_noise-normal_866e_46764s.pth",
+        "sha256": "61db1f762d916e94fea68ac66fda9a7636e0f3d1c0da1151267d35c035bd854e"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Rexxar/resolve/32722007fc756fc0a54508a176e97682f6a0b44e/rexxar-fp32-no_noise-normal.zip",
+        "member": "rexxar-fp32-no_noise-normal/rexxar-fp32-no_noise-normal.index",
+        "sha256": "1819ef19890e5dac26dc10ce21ff05e77d6f751df4c00988f7cd51fa20eb1ada"
+      }
+    }
+  }
+}

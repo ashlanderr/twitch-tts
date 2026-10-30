@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "xenia",
+  "en_speaker": "af_heart",
+  "en_silero_speaker": "en_1",
+  "title": "GLaDOS",
+  "category": "Портал",
+  "gender": "f",
+  "tags": [
+    "робот",
+    "аперчер"
+  ],
+  "source": {
+    "page": "https://huggingface.co/AppleElol/ru_glados",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/AppleElol/ru_glados/resolve/355708371b2ac8f316bb5894bed2703678aa6ece/ru_glados.zip",
+        "member": "ru_glados.pth",
+        "sha256": "4cc2594842a5d463864bd2276e7788d7471cdc2f503e0050bf137e73ae0144ca"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/AppleElol/ru_glados/resolve/355708371b2ac8f316bb5894bed2703678aa6ece/ru_glados.zip",
+        "member": "added_IVF424_Flat_nprobe_1_ru_glados_v2.index",
+        "sha256": "90f534653872e85779bea6f6bac4ec5736fe90150a58b768f8f4f24e963e70a2"
+      }
+    }
+  }
+}

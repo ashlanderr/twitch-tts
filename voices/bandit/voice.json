@@ -1,5 +1,27 @@
 {
   "pitch": 0,
   "ru_speaker": "aidar",
-  "en_speaker": "am_adam"
+  "en_speaker": "am_adam",
+  "title": "Бандит",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона",
+    "гопник"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/German-Bandits",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/German-Bandits/resolve/4373722ad1bd541d2be7fa8cd9f0af1b6d72272c/german-bandit-fp32-no_noise-normal.zip",
+        "member": "german-bandit-fp32-no_noise-normal/german-bandit-fp32-no_noise-normal_374e_32538s.pth",
+        "sha256": "0f1c0b253e1c0e8fe92531f6ad6491e541e5b39e22d3f620149ea28fe28582df"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/German-Bandits/resolve/4373722ad1bd541d2be7fa8cd9f0af1b6d72272c/german-bandit-fp32-no_noise-normal.zip",
+        "member": "german-bandit-fp32-no_noise-normal/german-bandit-fp32-no_noise-normal.index",
+        "sha256": "cb3b9672f8a1967cc12e75765d742ede30d43904c874bceb04a2503f3948e82e"
+      }
+    }
+  }
 }

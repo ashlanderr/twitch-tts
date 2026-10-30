@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Новичок",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Maluha-Stalker-newbye",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Maluha-Stalker-newbye/resolve/34f89fb90a99660e399587a7b235b84337c89c06/maluha-newbye-fp32-no_noise-normal.zip",
+        "member": "stalker-newbye-fp32-no_noise-normal/stalker-newbye-fp32-no_noise-normal_584e_74752s.pth",
+        "sha256": "620290dc0a665bbfa815f04abc53f7b39e9a613fa64def1a6611f151238499bd"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Maluha-Stalker-newbye/resolve/34f89fb90a99660e399587a7b235b84337c89c06/maluha-newbye-fp32-no_noise-normal.zip",
+        "member": "stalker-newbye-fp32-no_noise-normal/stalker-newbye-fp32-no_noise-normal.index",
+        "sha256": "0c2404a94fe8cf7d8ae2ac37fd90bcbdc48a89e2f62b139cdd9980f77c1b3f33"
+      }
+    }
+  }
+}

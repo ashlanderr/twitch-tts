@@ -1,0 +1,28 @@
+{
+  "pitch": 4,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Соник",
+  "category": "Мультфильмы",
+  "gender": "m",
+  "tags": [
+    "ёжик",
+    "sega"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/sonic/Sonic-rus dub.pth",
+        "sha256": "d862918f90cca4fdfebed487a8b1e66d15d0e75e9e20f23f363d0f44d6784889"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/sonic/added_IVF20_Flat_nprobe_1_sonic_v2.index",
+        "sha256": "48306cab79c14f8e915cb8a5064015a4f5a8fcc4574998fe46cc418e0fafea80"
+      }
+    }
+  }
+}

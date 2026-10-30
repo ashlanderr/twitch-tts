@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Уитли",
+  "category": "Портал",
+  "gender": "m",
+  "tags": [
+    "робот"
+  ],
+  "source": {
+    "page": "https://huggingface.co/AppleElol/Ru_wheetly",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/AppleElol/Ru_wheetly/resolve/7748dc2d3cf4ace3eabb16be32a8e73f8ceeedac/wheetly.zip",
+        "member": "Ru_Wheetly.pth",
+        "sha256": "bf4c47c2ffb6a37703a0f38307f57e2854d81621ebb0e2ead7599fde4cf518ee"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/AppleElol/Ru_wheetly/resolve/7748dc2d3cf4ace3eabb16be32a8e73f8ceeedac/wheetly.zip",
+        "member": "added_IVF612_Flat_nprobe_1_Ru_Wheetly_v2.index",
+        "sha256": "520a0ac38acdf206a44bd73503e27290d1b42c8f285d00955df9c4b983c45ae8"
+      }
+    }
+  }
+}

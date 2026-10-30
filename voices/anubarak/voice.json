@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Ануб'арак",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "плеть",
+    "нерубы"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Anubarak",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Anubarak/resolve/1dce7759737aa2be0208791cc9a571af8f152f4f/anubarak-fp32-no_noise_normal_de_recerb.zip",
+        "member": "anubarak-fp32-no_noise_normal_de_recerb/anubarak-fp32-no_noise_normal_de_recerb_792e_32472s.pth",
+        "sha256": "8fa6784bc618fc1eda195532d0fe97f61ec1c4a7a7747794c243ac721609798f"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Anubarak/resolve/1dce7759737aa2be0208791cc9a571af8f152f4f/anubarak-fp32-no_noise_normal_de_recerb.zip",
+        "member": "anubarak-fp32-no_noise_normal_de_recerb/anubarak-fp32-no_noise_normal_de_recerb.index",
+        "sha256": "15c244d54be6f3f0989e8e86080d85653625fc801bff647c70c93f16bbc7aea3"
+      }
+    }
+  }
+}

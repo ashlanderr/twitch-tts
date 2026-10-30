@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "xenia",
+  "en_speaker": "af_heart",
+  "en_silero_speaker": "en_1",
+  "title": "Турель",
+  "category": "Портал",
+  "gender": "f",
+  "tags": [
+    "робот"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Турель/ruturret_e40_s320.pth",
+        "sha256": "e81b328b2c4b623b35853cdb18b3a871af9d53e6ead33e52d2e7e5b46c18a413"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Турель/added_IVF106_Flat_nprobe_1_ruturret_v1.index",
+        "sha256": "78259e5e6a5bab055c8ff2a0cf78164f326289014babd85e6d0c65344aed3253"
+      }
+    }
+  }
+}

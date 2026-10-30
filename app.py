@@ -318,7 +318,10 @@ class App:
 
 
 def make_handler(app: App):
-    pages = {"/": ROOT / "static" / "index.html", "/overlay": ROOT / "static" / "overlay.html"}
+    pages = {"/": ROOT / "static" / "index.html", "/overlay": ROOT / "static" / "overlay.html",
+             "/voices": ROOT / "static" / "voices.html"}
+    samples = ROOT / "static" / "samples"  # written by samples.py
+    sample_types = {".mp3": "audio/mpeg", ".json": "application/json; charset=utf-8"}
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *a):
@@ -339,6 +342,12 @@ def make_handler(app: App):
             url = urlsplit(self.path)
             if url.path in pages:
                 self._send(200, pages[url.path].read_bytes(), "text/html; charset=utf-8")
+            elif url.path.startswith("/samples/"):
+                f = samples / url.path.removeprefix("/samples/")
+                if f.parent == samples and f.suffix in sample_types and f.is_file():
+                    self._send(200, f.read_bytes(), sample_types[f.suffix])
+                else:
+                    self._send(404, b"not found", "text/plain")
             elif url.path == "/api/state":
                 self._json(app.state())
             elif url.path == "/api/audio/stopped" and isinstance(app.audio, WebAudio):

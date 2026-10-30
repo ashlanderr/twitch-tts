@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Громмаш",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "орда",
+    "воин"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Grommash",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Grommash/resolve/b730bdf835238f2456cd066a86fb23b23fa4aacb/grom-fp32-no_noise_normal.zip",
+        "member": "grom-fp32-no_noise_normal/grom-fp32-no_noise_normal_947e_34092s.pth",
+        "sha256": "370c9fc7e239cc48023dd1722f1f3861f41ad47f43588a0cfc6a0dedde4baf77"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Grommash/resolve/b730bdf835238f2456cd066a86fb23b23fa4aacb/grom-fp32-no_noise_normal.zip",
+        "member": "grom-fp32-no_noise_normal/grom-fp32-no_noise_normal.index",
+        "sha256": "6b0fcd1dff87b387510581397160a7e2537e819c4f5253411c2d1feaf3ab0a37"
+      }
+    }
+  }
+}

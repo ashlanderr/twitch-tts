@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Инвокер",
+  "category": "Дота 2",
+  "gender": "m",
+  "tags": [
+    "маг"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Andrys23/PudgeRuRVC",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Andrys23/PudgeRuRVC/resolve/b2ae2b88a039d3f3749497160c290e770deee09d/invocerRu.zip",
+        "member": "invocerRu.pth",
+        "sha256": "9b600d1e5eb7ed9aa79caa3fa65ebab51fa4152cfa0278e335047efd26ad95c6"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Andrys23/PudgeRuRVC/resolve/b2ae2b88a039d3f3749497160c290e770deee09d/invocerRu.zip",
+        "member": "added_IVF640_Flat_nprobe_1_invocerRu_v2.index",
+        "sha256": "a0b4f57d2849b1f50b0ce8f5ad660b5b3dffa301dd52a7d01af763fa0229674c"
+      }
+    }
+  }
+}

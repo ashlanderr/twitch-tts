@@ -2,5 +2,27 @@
   "pitch": 0,
   "ru_speaker": "eugene",
   "en_speaker": "am_michael",
-  "en_silero_speaker": "en_0"
+  "en_silero_speaker": "en_0",
+  "title": "Сахаров",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "учёный",
+    "зона"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Borisenok-Saharov",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Borisenok-Saharov/resolve/e6ad9be58e6fcbf560e595ecbf1a9b24fb62bccc/borisenok-saharov-fp32-no_noise-normal.zip",
+        "member": "borisenok-saharov-fp32-no_noise-normal/borisenok-saharov-fp32-no_noise-normal_449e_24246s.pth",
+        "sha256": "06217855d467039bd4c600507af7dc0d431dede43166b8ee156bf81b7178acd5"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Borisenok-Saharov/resolve/e6ad9be58e6fcbf560e595ecbf1a9b24fb62bccc/borisenok-saharov-fp32-no_noise-normal.zip",
+        "member": "borisenok-saharov-fp32-no_noise-normal/borisenok-saharov-fp32-no_noise-normal.index",
+        "sha256": "35c20dd323bcb1009e2a1f3f4e27b20247bb1910aadb36423a4418c31efa3eef"
+      }
+    }
+  }
 }

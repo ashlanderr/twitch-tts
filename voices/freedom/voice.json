@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Свободовец",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона",
+    "свобода"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Bogush-Freedom",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Bogush-Freedom/resolve/bfe027c33b4bbd1be586bd7ad4b936cf34fa7e36/bogush-freedom-fp32-new-no_noise-normal.zip",
+        "member": "svoboda-fp32-new-no_noise-normal/svoboda-fp32-new-no_noise-normal_448e_54656s.pth",
+        "sha256": "0bef0a00bcea946a92cb5997d250fcef74b64db6037cf90afcffcd3f04a6686a"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Bogush-Freedom/resolve/bfe027c33b4bbd1be586bd7ad4b936cf34fa7e36/bogush-freedom-fp32-new-no_noise-normal.zip",
+        "member": "svoboda-fp32-new-no_noise-normal/svoboda-fp32-new-no_noise-normal.index",
+        "sha256": "c2857a73e257f3dbfe2469ebc991ea5a6c1893bbdf1a1912f9a2344b79ae4d5b"
+      }
+    }
+  }
+}

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Голоса TTS</title>
+<style>
+  :root {
+    --bg: #0e0e10; --panel: #18181b; --panel2: #1f1f23; --line: #2f2f35;
+    --text: #efeff1; --muted: #adadb8; --accent: #a970ff; --ok: #3fbf7f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 "Segoe UI", Inter, system-ui, sans-serif; }
+  header { display: flex; align-items: center; gap: 14px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  header a { color: var(--muted); text-decoration: none; font-size: 13px; }
+  header a:hover { color: var(--text); }
+  main { max-width: 1100px; margin: 0 auto; padding: 18px 16px 40px; }
+
+  .help { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .help div { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; color: var(--muted); }
+  .help b { color: var(--text); display: block; margin-bottom: 4px; font-weight: 600; }
+  code { background: var(--panel2); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; color: var(--text); font: 13px Consolas, monospace; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+  input[type=search] { flex: 1 1 240px; background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font: inherit; }
+  input[type=search]:focus { outline: none; border-color: var(--accent); }
+  .chip { background: var(--panel2); color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+  .chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  #found { color: var(--muted); font-size: 13px; margin: 4px 0 14px; }
+
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 22px 0 10px; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .voice { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .voice.playing { border-color: var(--accent); }
+  .top { display: flex; align-items: center; gap: 10px; }
+  .play { flex: none; width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--accent); color: #fff; cursor: pointer; display: grid; place-items: center; }
+  .play svg { width: 14px; height: 14px; fill: currentColor; }
+  .name { font-weight: 600; font-size: 15px; }
+  .cmd { background: none; border: none; padding: 0; cursor: pointer; text-align: left; font: 13px Consolas, monospace; color: var(--muted); }
+  .cmd:hover { color: var(--text); }
+  .cmd.copied { color: var(--ok); }
+  .bar { height: 4px; background: var(--panel2); border-radius: 2px; overflow: hidden; cursor: pointer; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--accent); }
+  .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag { font-size: 11px; color: var(--muted); background: var(--panel2); border: 1px solid var(--line); border-radius: 3px; padding: 0 6px; }
+  .text { font-size: 12px; color: var(--muted); font-style: italic; }
+  .empty { color: var(--muted); padding: 30px 0; text-align: center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Голоса TTS</h1>
+  <a href="/">← тестовый чат</a>
+</header>
+<main>
+  <section class="help">
+    <div><b>Свой голос</b>Нажмите на команду под именем, чтобы скопировать, и отправьте в чат: <code>!tts arthas</code></div>
+    <div><b>Одно сообщение другим голосом</b><code>!!!#bandit Эй, слышь</code>: голос выбирается только для этого сообщения</div>
+    <div><b>Ударение</b><code>+</code> перед гласной: <code>т+орты</code> или <code>торт+ы</code></div>
+  </section>
+
+  <div class="filters">
+    <input type="search" id="q" placeholder="Поиск: имя, команда, тег" autocomplete="off">
+    <button class="chip on" data-g="">все</button>
+    <button class="chip" data-g="m">мужские</button>
+    <button class="chip" data-g="f">женские</button>
+  </div>
+  <div class="filters" id="cats"></div>
+  <div id="found"></div>
+  <div id="list"></div>
+</main>
+
+<script>
+const PLAY = '<svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z"/></svg>';
+const PAUSE = '<svg viewBox="0 0 16 16"><path d="M3 2h4v12H3zM9 2h4v12H9z"/></svg>';
+const audio = new Audio();
+let voices = [], gender = "", category = "", current = null;
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c])); }
+
+function matches(v, q) {
+  if (gender && v.gender !== gender) return false;
+  if (category && v.category !== category) return false;
+  if (!q) return true;
+  return [v.id, v.title, v.category, ...v.tags].some(s => s.toLowerCase().includes(q));
+}
+
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const shown = voices.filter(v => matches(v, q));
+  document.getElementById("found").textContent = `Найдено: ${shown.length} из ${voices.length}`;
+  const groups = new Map();
+  for (const v of shown) {
+    if (!groups.has(v.category)) groups.set(v.category, []);
+    groups.get(v.category).push(v);
+  }
+  const list = document.getElementById("list");
+  list.innerHTML = shown.length ? "" : '<div class="empty">Ничего не найдено</div>';
+  for (const [cat, vs] of groups) {
+    list.insertAdjacentHTML("beforeend", `<h2>${esc(cat)}</h2><div class="grid">${vs.map(v => `
+      <div class="voice${current === v.id ? " playing" : ""}" data-id="${esc(v.id)}">
+        <div class="top">
+          <button class="play" title="Слушать">${current === v.id && !audio.paused ? PAUSE : PLAY}</button>
+          <div>
+            <div class="name">${esc(v.title)}</div>
+            <button class="cmd" title="Скопировать команду">!tts ${esc(v.id)}</button>
+          </div>
+        </div>
+        <div class="bar"><i></i></div>
+        <div class="tags">${[v.gender === "f" ? "женский" : v.gender === "m" ? "мужской" : null, ...v.tags]
+          .filter(Boolean).map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+        <div class="text">«${esc(v.text)}»</div>
+      </div>`).join("")}</div>`);
+  }
+}
+
+function card(id) { return document.querySelector(`.voice[data-id="${CSS.escape(id)}"]`); }
+
+function setPlaying(id) {
+  document.querySelectorAll(".voice").forEach(el => {
+    const on = el.dataset.id === id;
+    el.classList.toggle("playing", on);
+    el.querySelector(".play").innerHTML = on && !audio.paused ? PAUSE : PLAY;
+    if (!on) el.querySelector(".bar i").style.width = "0";
+  });
+}
+
+function toggle(id) {
+  if (current === id) {
+    audio.paused ? audio.play() : audio.pause();
+    return;
+  }
+  current = id;
+  audio.src = "/samples/" + voices.find(v => v.id === id).sample;
+  audio.play();
+}
+
+audio.addEventListener("play", () => setPlaying(current));
+audio.addEventListener("pause", () => setPlaying(current));
+audio.addEventListener("ended", () => { audio.currentTime = 0; setPlaying(current); });
+audio.addEventListener("timeupdate", () => {
+  const el = current && card(current);
+  if (el && audio.duration) el.querySelector(".bar i").style.width = (100 * audio.currentTime / audio.duration) + "%";
+});
+
+document.getElementById("list").addEventListener("click", e => {
+  const el = e.target.closest(".voice");
+  if (!el) return;
+  const id = el.dataset.id;
+  const cmd = e.target.closest(".cmd");
+  if (cmd) {
+    navigator.clipboard.writeText(`!tts ${id}`).then(() => {
+      cmd.textContent = "скопировано";
+      cmd.classList.add("copied");
+      setTimeout(() => { cmd.textContent = `!tts ${id}`; cmd.classList.remove("copied"); }, 1200);
+    });
+  } else if (e.target.closest(".play")) {
+    toggle(id);
+  } else if (e.target.closest(".bar") && current === id && audio.duration) {
+    const r = e.target.closest(".bar").getBoundingClientRect();
+    audio.currentTime = audio.duration * (e.clientX - r.left) / r.width;
+  }
+});
+
+document.getElementById("q").addEventListener("input", render);
+document.querySelectorAll("[data-g]").forEach(b => b.addEventListener("click", () => {
+  gender = b.dataset.g;
+  document.querySelectorAll("[data-g]").forEach(x => x.classList.toggle("on", x === b));
+  render();
+}));
+
+fetch("/samples/voices.json").then(r => r.json()).then(vs => {
+  voices = vs;
+  const cats = document.getElementById("cats");
+  for (const c of ["", ...new Set(vs.map(v => v.category))]) {
+    const b = document.createElement("button");
+    b.className = "chip" + (c ? "" : " on");
+    b.textContent = c || "все категории";
+    b.addEventListener("click", () => {
+      category = c;
+      cats.querySelectorAll(".chip").forEach(x => x.classList.toggle("on", x === b));
+      render();
+    });
+    cats.appendChild(b);
+  }
+  render();
+}).catch(() => {
+  document.getElementById("list").innerHTML = '<div class="empty">Нет образцов. Запишите их: <code>python samples.py</code></div>';
+});
+</script>
+</body>
+</html>

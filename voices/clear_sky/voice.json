@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Чистонебовец",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона",
+    "чистое небо"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Vilkov-Clear_Sky",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Vilkov-Clear_Sky/resolve/7207d328c3fc44de5f11f0dd0c0e825846817edc/vilkov-csky-fp32-no_noise-normal.zip",
+        "member": "vilkov-csky-fp32-no_noise-normal/vilkov-csky-fp32-no_noise-normal_975e_94575s.pth",
+        "sha256": "3e5d6a77c3039ac6042f3e977f1f8abf1998ff2f5b0524d61c4a12451a8796f9"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Vilkov-Clear_Sky/resolve/7207d328c3fc44de5f11f0dd0c0e825846817edc/vilkov-csky-fp32-no_noise-normal.zip",
+        "member": "vilkov-csky-fp32-no_noise-normal/vilkov-csky-fp32-no_noise-normal.index",
+        "sha256": "ae1c8811a7c1c2e88031a06a6afdc5da10298ff796ba4723f0f5b8d33c6cc203"
+      }
+    }
+  }
+}

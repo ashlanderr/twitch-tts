@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Утер",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "альянс",
+    "паладин"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Uther",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Uther/resolve/9bcdf4556868ceee2e12a29243acd8c2b73454df/uther-fp32-no_noise-normal.zip",
+        "member": "uther-fp32-no_noise-normal/uther-fp32-no_noise-normal_678e_18306s.pth",
+        "sha256": "a824fa62795ec257c9773bcce38ae25f933cb922545b5063dc1505ce4201a596"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Uther/resolve/9bcdf4556868ceee2e12a29243acd8c2b73454df/uther-fp32-no_noise-normal.zip",
+        "member": "uther-fp32-no_noise-normal/uther-fp32-no_noise-normal.index",
+        "sha256": "fb2bbcb19ce216d337bcf1eb6af9ac83ecbc3504a0f47ddabab9960ca5a7ce2f"
+      }
+    }
+  }
+}

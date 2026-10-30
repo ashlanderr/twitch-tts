@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "eugene",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Кел'Тузад",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "плеть",
+    "лич"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Kel-Thuzad",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Kel-Thuzad/resolve/f5de8261b3e72df9c082bfbfa4c29e92c003b91d/Kel-tuzed-hubert_model.zip",
+        "member": "Kel-tuzed-hubert_model/Kel-tuzed_e591_s11820.pth",
+        "sha256": "e0d27978a75573974f0393847913e9a91ea8f7d32c76da3dee41c4cea14f313a"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Kel-Thuzad/resolve/f5de8261b3e72df9c082bfbfa4c29e92c003b91d/Kel-tuzed-hubert_model.zip",
+        "member": "Kel-tuzed-hubert_model/Kel-tuzed_v2.index",
+        "sha256": "6ce30b8ab1eaca0d396280f2e68cb2b9ea12eabbf71b68b73f2b3b10cbd97079"
+      }
+    }
+  }
+}

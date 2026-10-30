@@ -1,0 +1,29 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Пеон",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "орда",
+    "юнит",
+    "работа-работа"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Пеон/peon_e400_s5600.pth",
+        "sha256": "6fb663e12d803cae3a81fdbd07ee9061644560a6fe06d11a91adc146c39a0f89"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Пеон/added_IVF1083_Flat_nprobe_1_peon_v2.index",
+        "sha256": "f032e30d4240b1df8c9a4933566045e4b07cfa9a8b36d3820d25bf95deeebf30"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Шрек",
+  "category": "Мультфильмы",
+  "gender": "m",
+  "tags": [
+    "огр"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Шрек/ShrekRus.pth",
+        "sha256": "e83658693de6f0f073271ece2c804eb67e709479fcaea9e5d0a529cb42537884"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Шрек/added_IVF100_Flat_nprobe_1_ShrekRus_v2.index",
+        "sha256": "69e887362b5899c26dfdb4678f49261e16d57937a3903cc3d88c6bb444f6e8b0"
+      }
+    }
+  }
+}

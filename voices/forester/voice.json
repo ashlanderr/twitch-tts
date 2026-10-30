@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "eugene",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Лесник",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "зона",
+    "лес"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Borisenok-forestman",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Borisenok-forestman/resolve/11315cefbc407ab435d729c5b91bf94d34289e5d/borisenok-forestman-no_noise-normal.zip",
+        "member": "borisenok-forestman-no_noise-normal/borisenok-forestman-no_noise-normal_936e_35568s.pth",
+        "sha256": "585a7729c29088e0c3c0c51664412fb360df7e81844cc7f5363b7c7c5caf3054"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Borisenok-forestman/resolve/11315cefbc407ab435d729c5b91bf94d34289e5d/borisenok-forestman-no_noise-normal.zip",
+        "member": "borisenok-forestman-no_noise-normal/borisenok-forestman-no_noise-normal.index",
+        "sha256": "6d3915aa8a228a31902311f9700befedda50f21030b8f1e5a43364a421ad9a7d"
+      }
+    }
+  }
+}

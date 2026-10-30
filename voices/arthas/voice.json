@@ -2,5 +2,27 @@
   "pitch": 0,
   "ru_speaker": "eugene",
   "en_speaker": "am_adam",
-  "en_silero_speaker": "en_0"
+  "en_silero_speaker": "en_0",
+  "title": "Артас",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "король-лич",
+    "плеть"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Arthas-Paladin",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Arthas-Paladin/resolve/d0101eb5f5f8ab2ca63f7e2497df8e3ed13bb86a/arthas-paladin-fp32-no_noise-normal.zip",
+        "member": "arthas-paladin-fp32-no_noise-normal/arthas-paladin-fp32-no_noise-normal_724e_39096s.pth",
+        "sha256": "5d57cc52b189e80c561f12e3a38baab4210b17d47c5dce661d5edb1e7280416b"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Arthas-Paladin/resolve/d0101eb5f5f8ab2ca63f7e2497df8e3ed13bb86a/arthas-paladin-fp32-no_noise-normal.zip",
+        "member": "arthas-paladin-fp32-no_noise-normal/arthas-paladin-fp32-no_noise-normal.index",
+        "sha256": "ac6382e6fba48c488a86a3fe55075ac8adeb8638b758ee66cb235306f4eb1d56"
+      }
+    }
+  }
 }

@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "aidar",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Пудж",
+  "category": "Дота 2",
+  "gender": "m",
+  "tags": [
+    "мясник",
+    "хук"
+  ],
+  "source": {
+    "page": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Пудж/pudge.pth",
+        "sha256": "208d527ac15cc349645ce0cee7724c2ac3725bccbe5aa83dbe4102a7e0cacd4c"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/daswer123/RVC-big-ru-voice-pack/resolve/67694e5665d221210d166f1e64cd34568dacd012/MODELS.zip",
+        "member": "Персонажи/Пудж/pudge.index",
+        "sha256": "ec099340e85917ee0d32f25ac1ae8e52df40c16162d6c285dd65428b98352aef"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "pitch": 0,
+  "ru_speaker": "eugene",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Медик",
+  "category": "Team Fortress 2",
+  "gender": "m",
+  "tags": [
+    "tf2"
+  ],
+  "source": {
+    "page": "https://huggingface.co/DaunIDebil/Medic-TF2-RusDub-RVC2.0",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/DaunIDebil/Medic-TF2-RusDub-RVC2.0/resolve/dc7d7cee87e5132339024d4d53cb5fccd94378c2/MedicRUS-RVC2.0.zip",
+        "member": "Medic.pth",
+        "sha256": "a3a251b5304cfe37ec81735a80cfba4a5f32b6090d6cdf5332cc9076c1a41743"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/DaunIDebil/Medic-TF2-RusDub-RVC2.0/resolve/dc7d7cee87e5132339024d4d53cb5fccd94378c2/MedicRUS-RVC2.0.zip",
+        "member": "added_IVF412_Flat_nprobe_1_Medic_v2.index",
+        "sha256": "85289ad4ed8a4ddbc57413f8b289f1ad17c1f43151207acaf555be0578940fa7"
+      }
+    }
+  }
+}

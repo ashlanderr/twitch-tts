@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "eugene",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Фарион",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "ночные эльфы",
+    "друид"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Furion",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Furion/resolve/996fb0e327b1ab9fdf7d3b60868737ff8a81b275/furion-fp32-no_noise-normal-de_reverb.zip",
+        "member": "furion-fp32-no_noise-normal-de_reverb/furion-fp32-no_noise-normal-de_reverb_825e_55275s.pth",
+        "sha256": "96565a70cab3d58d789883c96207e00ea33ffb29ab8e667baa433c91eb5fa19a"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Furion/resolve/996fb0e327b1ab9fdf7d3b60868737ff8a81b275/furion-fp32-no_noise-normal-de_reverb.zip",
+        "member": "furion-fp32-no_noise-normal-de_reverb/furion-fp32-no_noise-normal-de_reverb.index",
+        "sha256": "ada9de4239ac619dabbf50e96bfe33c655d65060a0b29188489f816c3a30c66b"
+      }
+    }
+  }
+}

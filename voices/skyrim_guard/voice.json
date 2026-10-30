@@ -1,5 +1,27 @@
 {
   "pitch": 0,
   "ru_speaker": "aidar",
-  "en_speaker": "am_adam"
+  "en_speaker": "am_adam",
+  "title": "Стражник",
+  "category": "Скайрим",
+  "gender": "m",
+  "tags": [
+    "стража",
+    "стрела в колене"
+  ],
+  "source": {
+    "page": "https://huggingface.co/MilkyBEATz/skyrim_guard",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/MilkyBEATz/skyrim_guard/resolve/9ff49195ecb0482587cfc7da118ba455a28ce6f6/guard.zip",
+        "member": "guard.pth",
+        "sha256": "80d8e3dfd9febbfd5aa9a48ebccc0c01f8214935de831ee14f0a6b6dc908bcdd"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/MilkyBEATz/skyrim_guard/resolve/9ff49195ecb0482587cfc7da118ba455a28ce6f6/guard.zip",
+        "member": "added_IVF1391_Flat_nprobe_1_guard_v2.index",
+        "sha256": "b60b85c1d26c0aea0f0edfbaf93063acc70830adc21011e411038aefb21f3103"
+      }
+    }
+  }
 }

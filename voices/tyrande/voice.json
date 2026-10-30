@@ -2,5 +2,27 @@
   "pitch": 0,
   "ru_speaker": "baya",
   "en_speaker": "af_bella",
-  "en_silero_speaker": "en_1"
+  "en_silero_speaker": "en_1",
+  "title": "Тиранда",
+  "category": "Варкрафт",
+  "gender": "f",
+  "tags": [
+    "ночные эльфы",
+    "жрица"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Tyrande",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Tyrande/resolve/3e364f26c7b570a8257e0cea1966e4c3d9494160/tyrande-fp32-no_noise-normal-de_reverb.zip",
+        "member": "tyrande-fp32-no_noise-normal-de_reverb/tyrande-fp32-no_noise-normal-de_reverb_701e_53276s.pth",
+        "sha256": "b4f8f5b2f18911d3000d4f25fbb0a651490d6e5d103c3d3554908613ebdc6bcb"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Tyrande/resolve/3e364f26c7b570a8257e0cea1966e4c3d9494160/tyrande-fp32-no_noise-normal-de_reverb.zip",
+        "member": "tyrande-fp32-no_noise-normal-de_reverb/tyrande-fp32-no_noise-normal-de_reverb.index",
+        "sha256": "e6c835a5f572cb05c776941d44f1e90871f38d1a5a185fae4808911636409f1f"
+      }
+    }
+  }
 }

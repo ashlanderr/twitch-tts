@@ -1,0 +1,28 @@
+{
+  "pitch": 0,
+  "ru_speaker": "eugene",
+  "en_speaker": "am_adam",
+  "en_silero_speaker": "en_0",
+  "title": "Кель'тас",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "эльфы крови",
+    "маг"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Kael",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Kael/resolve/759bf0694f1cbdebaaa3489069a1e73d5cd8b0a3/kael-fp32_no-noise_normal.zip",
+        "member": "kael-fp32_no-noise_normal/kael-fp32_no-noise_normal_798e_62244s.pth",
+        "sha256": "f6d6f0648b65a17eca762cab982a0b9ab87426da97d96b8bef02da0838f75216"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Kael/resolve/759bf0694f1cbdebaaa3489069a1e73d5cd8b0a3/kael-fp32_no-noise_normal.zip",
+        "member": "kael-fp32_no-noise_normal/kael-fp32_no-noise_normal.index",
+        "sha256": "5ae22097367d06b2664974e8c972797b2d4a6c93122381f861ecf697870de80d"
+      }
+    }
+  }
+}

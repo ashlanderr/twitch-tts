@@ -1,5 +1,27 @@
 {
   "pitch": 0,
   "ru_speaker": "eugene",
-  "en_speaker": "am_michael"
+  "en_speaker": "am_michael",
+  "title": "Сидорович",
+  "category": "Сталкер",
+  "gender": "m",
+  "tags": [
+    "торговец",
+    "зона"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Vilkov-Sidorovich",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Vilkov-Sidorovich/resolve/6df9843bd91d7b222144c776c5af9d518cc354cf/vilkov-sidorovich-fp32-no_noise-normal.zip",
+        "member": "vilkov-sidorovich-fp32-no_noise-normal/vilkov-sidorovich-fp32-no_noise-normal_737e_19162s.pth",
+        "sha256": "2dc42a403ba024d20cad5e066ed3c7837ffa16eff2f208da7c1aa106e88404fd"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Vilkov-Sidorovich/resolve/6df9843bd91d7b222144c776c5af9d518cc354cf/vilkov-sidorovich-fp32-no_noise-normal.zip",
+        "member": "vilkov-sidorovich-fp32-no_noise-normal/vilkov-sidorovich-fp32-no_noise-normal.index",
+        "sha256": "57c5e6e9af56768b92a51145bed9c676979f5ded1d79a7942b5f132659eba249"
+      }
+    }
+  }
 }

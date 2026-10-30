@@ -2,5 +2,27 @@
   "pitch": 0,
   "ru_speaker": "aidar",
   "en_speaker": "am_michael",
-  "en_silero_speaker": "en_0"
+  "en_silero_speaker": "en_0",
+  "title": "Иллидан",
+  "category": "Варкрафт",
+  "gender": "m",
+  "tags": [
+    "демон",
+    "охотник на демонов"
+  ],
+  "source": {
+    "page": "https://huggingface.co/Warlock700/Illidan",
+    "files": {
+      "model.pth": {
+        "url": "https://huggingface.co/Warlock700/Illidan/resolve/626d58496e49c821004f2cba32ccf6b688d1e971/Illidan-fp32-no_noise-normal-de_reverb.zip",
+        "member": "Illidan-fp32-no_noise-normal-de_reverb/Illidan-fp32-no_noise-normal-de_reverb_809e_11326s.pth",
+        "sha256": "38dd777d34c68a8ff3e776cfb79be41bd759d2f04f3617728e0f625a307c7d23"
+      },
+      "model.index": {
+        "url": "https://huggingface.co/Warlock700/Illidan/resolve/626d58496e49c821004f2cba32ccf6b688d1e971/Illidan-fp32-no_noise-normal-de_reverb.zip",
+        "member": "Illidan-fp32-no_noise-normal-de_reverb/Illidan-fp32-no_noise-normal-de_reverb.index",
+        "sha256": "86b35f0a422eb9de9251e26bab7dcf917347770bfc474514d9cc60d4d8424a39"
+      }
+    }
+  }
 }
